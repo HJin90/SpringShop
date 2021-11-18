@@ -1,7 +1,13 @@
+/*member CSS*/
 .fieldError {
     color: #bd2130;
 }
 
 .member-button {
     text-align: center;
+}
+
+/*memberLogin CSS*/
+.error {
+    color: #bd2130;
 }
