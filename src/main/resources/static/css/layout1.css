@@ -29,3 +29,8 @@ body {
     color: #FFFAFA;
     border-color: #FFFAFA;
 }
+
+.btn-outline-success:hover {
+    background-color: #A52A2A;
+    border-color: #A52A2A;
+}
