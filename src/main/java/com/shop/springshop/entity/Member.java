@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @ToString
-public class Member {
+public class Member extends BaseEntity{
 
     @Id
     @Column(name = "member_id")
@@ -33,10 +33,6 @@ public class Member {
 
     @Enumerated(EnumType.STRING)
     private Role role;
-
-    private LocalDateTime registerTime;
-
-    private LocalDateTime updateTime;
 
     public static Member createMember(MemberFormDto memberFormDto, PasswordEncoder passwordEncoder) {
         Member member = new Member();
