@@ -2,6 +2,7 @@ package com.shop.springshop.entity;
 
 
 import com.shop.springshop.constant.ItemSellStatus;
+import com.shop.springshop.dto.ItemFormDto;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -36,6 +37,14 @@ public class Item extends BaseEntity{
 
     @Enumerated(EnumType.STRING)
     private ItemSellStatus status;
+
+    public void updateItem(ItemFormDto itemFormDto) {
+        this.name = itemFormDto.getName();
+        this.price = itemFormDto.getPrice();
+        this.stock = itemFormDto.getStock();
+        this.detail = itemFormDto.getDetail();
+        this.status = itemFormDto.getItemSellStatus();
+    }
 
 
 }
