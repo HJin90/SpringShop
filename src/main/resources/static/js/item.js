@@ -1,5 +1,4 @@
 $(document).ready(function(){
-    var errorMessage = [[${errorMessage}]];
     if(errorMessage != null){
         alert(errorMessage);
     }
@@ -10,7 +9,7 @@ $(document).ready(function(){
 function bindDomEvent(){
     $(".custom-file-input").on("change", function (){
         var fileName = $(this).val().split("\\").pop();
-        var fileExt = fileName.substring(fileName.lastIndexOf("."+1));
+        var fileExt = fileName.substring(fileName.lastIndexOf(".")+1);
         fileExt = fileExt.toLowerCase();
 
         if(fileExt != 'jpg' && fileExt !='jpeg' && fileExt != 'gif' && fileExt != 'png' && fileExt != 'bmp'){

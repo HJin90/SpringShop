@@ -4,6 +4,9 @@
 <head>
     <title>상품등록</title>
     <link th:href="@{/css/item.css}" rel="stylesheet">
+    <script th:inline="javascript">
+        var errorMessage = $.parseJSON('[[${errorMessage}]]')
+    </script>
     <script type="text/javascript" th:src="@{/js/item.js}"></script>
 </head>
 <div layout:fragment="content">
@@ -16,7 +19,7 @@
         <div class="form-group">
             <select th:field="*{itemSellStatus}" class="custom-select">
                 <option value="SELL">판매중</option>
-                <option value="SOLD_OUT">품정</option>
+                <option value="SOLD_OUT">품절</option>
             </select>
         </div>
 
