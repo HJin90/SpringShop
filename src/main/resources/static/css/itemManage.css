@@ -1,0 +1,15 @@
+style {
+    margin-right: 10px;
+}
+.form-control{
+    width: auto;
+    margin: 0 5px;
+}
+.btn-primary, .btn-primary:hover{
+    background-color: #E08363;
+    border-color: #E08363;
+}
+.page-item.active .page-link{
+    background-color: #E08363;
+    border-color: #E08363;
+}
