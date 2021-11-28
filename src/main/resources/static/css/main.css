@@ -28,3 +28,7 @@ a:hover{
 .center{
     text-align: center;
 }
+
+img{
+    height: auto;
+}

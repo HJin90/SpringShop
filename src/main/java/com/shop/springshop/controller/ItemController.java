@@ -27,12 +27,14 @@ public class ItemController {
 
     private final ItemService itemService;
 
+    //상품등록페이지
     @GetMapping("/admin/item/new")
     public String itemForm(Model model){
         model.addAttribute("itemFormDto", new ItemFormDto());
         return "/item/itemForm";
     }
 
+    //상품등록
     @PostMapping("/admin/item/new")
     public String itemNew(@Valid ItemFormDto itemFormDto, BindingResult bindingResult, Model model,
                           @RequestParam("itemImgFile")List<MultipartFile> itemImgFileList) {
@@ -57,6 +59,7 @@ public class ItemController {
         return "redirect:/";
     }
 
+    //상품 상세(관리자)
     @GetMapping("/admin/item/{itemId}")
     public String itemDtl(@PathVariable("itemId")Long id, Model model) {
         try {
@@ -72,6 +75,7 @@ public class ItemController {
         return "item/itemForm";
     }
 
+    //상품 정보 수정
     @PostMapping("/admin/item/{itemId}")
     public String itemUpdate(@Valid ItemFormDto itemFormDto, BindingResult bindingResult,
                              @RequestParam("itemImgFile") List<MultipartFile> itemImgFileList, Model model){
@@ -96,6 +100,7 @@ public class ItemController {
 
     }
 
+    //상품 목록(관리자)
     @GetMapping(value = {"/admin/items","/admin/items/{page}"})
     public String itemManage(ItemSearchDto itemSearchDto, @PathVariable("page")Optional<Integer> page, Model model) {
         Pageable pageable = PageRequest.of(page.isPresent() ? page.get() : 0,3);
@@ -104,6 +109,13 @@ public class ItemController {
         model.addAttribute("itemSearchDto", itemSearchDto);
         model.addAttribute("maxPage",5);
         return "item/itemMng";
+    }
+
+    @GetMapping("/item/{itemId}")
+    public String itemDtl(Model model, @PathVariable("itemId")Long itemId) {
+        ItemFormDto itemFormDto = itemService.getItemDtl(itemId);
+        model.addAttribute("item",itemFormDto);
+        return "item/itemDtl";
     }
 
 }
