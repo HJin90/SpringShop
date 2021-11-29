@@ -3,6 +3,7 @@ package com.shop.springshop.entity;
 
 import com.shop.springshop.constant.ItemSellStatus;
 import com.shop.springshop.dto.ItemFormDto;
+import com.shop.springshop.exception.OutOfStockException;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -44,6 +45,14 @@ public class Item extends BaseEntity{
         this.stock = itemFormDto.getStock();
         this.detail = itemFormDto.getDetail();
         this.status = itemFormDto.getItemSellStatus();
+    }
+
+    public void removeStock(int stockNumber) {
+        int restStock = this.stock - stockNumber;
+        if(restStock < 0) {
+            throw new OutOfStockException("상품의 재고가 부족 합니다. (현재 재고 수량: "+this.stock+")");
+        }
+        this.stock = restStock;
     }
 
 
