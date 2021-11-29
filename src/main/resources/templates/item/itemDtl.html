@@ -45,7 +45,7 @@
 
             <div th:if="${item.itemSellStatus == T(com.shop.springshop.constant.ItemSellStatus).SELL}" class="text-right">
                 <button type="button" class="btn btn-light border border-primary btn-lg">장바구니 담기</button>
-                <button type="button" class="btn btn-primary btn-lg">주문하기</button>
+                <button type="button" class="btn btn-primary btn-lg" onclick="order()">주문하기</button>
             </div>
 
             <div th:unless="${item.itemSellStatus == T(com.shop.springshop.constant.ItemSellStatus).SELL}" class="text-right">
