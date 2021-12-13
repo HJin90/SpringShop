@@ -1,6 +1,7 @@
 package com.shop.springshop.service;
 
 import com.shop.springshop.constant.ItemSellStatus;
+import com.shop.springshop.constant.OrderStatus;
 import com.shop.springshop.dto.OrderDto;
 import com.shop.springshop.entity.Item;
 import com.shop.springshop.entity.Member;
@@ -19,6 +20,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
 @Transactional
@@ -71,6 +74,24 @@ public class OrderServiceTest {
 
         int totalPrice = orderDto.getCount() * item.getPrice();
 
-        Assertions.assertEquals(totalPrice, order.getTotalPrice());
+        assertEquals(totalPrice, order.getTotalPrice());
+    }
+
+    @Test
+    @DisplayName("주문 취소 테스트")
+    public void cancelOrder() {
+        Item item = saveItem();
+        Member member = saveMember();
+
+        OrderDto orderDto = new OrderDto();
+        orderDto.setCount(10);
+        orderDto.setItemId(item.getId());
+        Long orderId = orderService.order(orderDto, member.getEmail());
+
+        Order order = orderRepository.findById(orderId).orElseThrow(EntityNotFoundException::new);
+        orderService.cancelOrder(orderId);
+
+        assertEquals(OrderStatus.CANCEL, order.getOrderStatus());
+        assertEquals(100, item.getStock());
     }
 }

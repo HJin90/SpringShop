@@ -6,6 +6,10 @@
     <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
     <title>주문이력</title>
     <link th:href="@{/css/orderHis.css}" rel="stylesheet">
+    <script th:inline="javascript">
+        var page = $.parseJSON('[[${page}]]')
+    </script>
+    <script type="text/javascript" th:src="@{/js/orderHist.js}"></script>
 </head>
 <div layout:fragment="content" class="content-mg">
     <h2 class="mb-4">구매이력</h2>
@@ -15,7 +19,7 @@
             <h4 th:text="${order.orderDate} + ' 주문'"></h4>
             <div class="ml-3">
                 <th:block th:if="${order.orderStatus == T(com.shop.springshop.constant.OrderStatus).ORDER}">
-                    <button type="button" class="btn btn-outline-secondary" th:value="${order.orderId}">주문취소</button>
+                    <button type="button" class="btn btn-outline-secondary" th:value="${order.orderId}" onclick="cancelOrder(this.value)">주문취소</button>
                 </th:block>
                 <th:block th:unless="${order.orderStatus == T(com.shop.springshop.constant.OrderStatus).ORDER}">
                     <h4>(취소완료)</h4>
