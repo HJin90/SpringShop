@@ -42,7 +42,7 @@
                                 </span>
                                 <input type="number" name="count" th:id="'count_'+${cartItem.cartItemId}" th:value="${cartItem.count}" min="1" onchange="changeCount(this)" class="form-control mr-2">
                                 <button type="button" class="close" aria-label="Close">
-                                    <span aria-hidden="true" th:data-id="${cartItem.cartItemId}">&times;</span>
+                                    <span aria-hidden="true" th:data-id="${cartItem.cartItemId}" onclick="deleteCartItem(this)">&times;</span>
                                 </button>
                             </span>
                         </div>

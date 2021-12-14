@@ -63,3 +63,32 @@ function updateCartItemCount(cartItemId, count){
        }
     });
 }
+
+function deleteCartItem(obj){
+    var cartItemId = obj.dataset.id;
+    var token = $("meta[name='_csrf']").attr("content");
+    var header = $("meta[name='_csrf_header']").attr("content");
+
+    var url = "/cartItem/" + cartItemId;
+
+    $.ajax({
+       url: url,
+        type: "DELETE",
+        beforeSend: function (xhr) {
+           xhr.setRequestHeader(header, token);
+        },
+        dataType: "json",
+        cache: false,
+        success: function (result, status){
+           location.href='/cart';
+        },
+        error: function (jqXHR, status, error) {
+           if(jqXHR.status == '401'){
+               alert('로그인 후 이용해주세요');
+               location.href = '/members/login';
+           } else{
+               alert(jqXHR.responseJSON.message);
+           }
+        }
+    });
+}
